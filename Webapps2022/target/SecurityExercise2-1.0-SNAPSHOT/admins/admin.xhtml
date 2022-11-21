@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Administrator Page</title>
+    </h:head>
+    <h:body>
+        <h:outputLabel value="Welcome to the Administrator Page!"/>
+        <br/>
+        
+        <h:form>
+            <h:commandButton value="Logout" action="#{loginBean.logout()}"/>
+            <h:commandButton value="View user accounts" action="user_accounts"/>
+            <h:commandButton value="View all transactions" action="view_transactions"/>
+            <h:commandButton value="Register a new admin" action="register_admin"/>
+            <br/><br/>
+            <h:button value="User Page" outcome="/faces/users/user"/>
+        </h:form>
+    </h:body>
+</html>
+

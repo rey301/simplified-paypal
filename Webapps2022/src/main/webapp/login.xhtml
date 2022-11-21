@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Log In</title>
+    </h:head>
+    <body>
+        <h2>Hello, please log in:</h2>
+        <h:form>
+            Username: <h:inputText id="username" label="Username" maxlength="20" required="true" requiredMessage="Please enter a username" title="Username" value="#{loginBean.username}"/>
+            Password: <h:inputText id="password" label="Password" maxlength="20" required="true" requiredMessage="Please enter a password" title="Password" value="#{loginBean.password}"/>
+            <br/>
+            <h:commandButton value="Login" action="#{loginBean.login()}"></h:commandButton>
+        </h:form>
+    </body>
+</html>

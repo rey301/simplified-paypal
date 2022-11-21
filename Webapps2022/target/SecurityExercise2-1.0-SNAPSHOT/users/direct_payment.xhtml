@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Direct payment</title>
+    </h:head>
+    <h:body>
+        Select a user
+        
+        <div align="left">
+            <h:form>
+                <!--Excludes the logged in user-->
+                <label style="font-weight:bold"> User List </label>  <br/>
+                <h:dataTable value="#{userBean.getUserList()}" var="aaa">
+                    <h:column>  
+                        <f:facet name="header"> Username: </f:facet>
+                        #{aaa.username}
+                    </h:column> 
+
+                    <h:column> 
+                        <f:facet name="header"> Name: </f:facet>
+                        #{aaa.name}
+                    </h:column> 
+
+                    <h:column> 
+                        <f:facet name="header"> Surname: </f:facet>
+                        #{aaa.surname}
+                    </h:column> 
+                    
+                    <h:column> 
+                        <!--Using the id taken from the user list, view the user-->
+                        <h:commandButton value = "Select" action = "#{userBean.viewUser(aaa.id,'user_direct_payment')}" />
+                    </h:column> 
+                </h:dataTable>
+
+            </h:form>
+            <h:form>
+                <h:commandButton value="Back" action="user"></h:commandButton>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

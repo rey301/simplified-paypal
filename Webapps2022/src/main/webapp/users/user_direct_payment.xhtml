@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+      
+    <h:head>
+        <title>User Payment</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <!--Reads details using ids that were set from clicking buttons on previous pages-->
+            <h3 style="font-weight:bold"> Sender Details </h3>  
+            <b>Name: </b> <h:outputText value="#{userBean.readName(userBean.usrSrv.loginId)}"></h:outputText><br></br>
+            <b>Surname: </b> <h:outputText value="#{userBean.readSurname(userBean.usrSrv.loginId)}"></h:outputText><br></br>
+            <b>Amount: </b> <h:outputText value="#{userBean.readCurrSymbol(userBean.usrSrv.loginId).concat(userBean.readValue(userBean.usrSrv.loginId))}"></h:outputText>
+            
+            <h3 style="font-weight:bold"> Recipient Details </h3>  
+            <b>Name: </b> <h:outputText value="#{userBean.readName(userBean.usrSrv.recId)}"></h:outputText><br></br>
+            <b>Surname: </b> <h:outputText value="#{userBean.readSurname(userBean.usrSrv.recId)}"></h:outputText><br></br>
+            
+            <br/>
+            <!--Sets the 'sentAmount' to the user input and using a validator, it only allows the max amount to be account value of the logged in user-->  
+            Enter an amount: <h:inputText id = "payInput" label = "pay" value="#{userBean.sentAmount}" >
+                <f:validateDoubleRange minimum = "0.01" maximum = "#{userBean.readValue(userBean.usrSrv.loginId)}" />
+            </h:inputText>   
+            <h:commandButton value="Submit"></h:commandButton><br></br>
+
+            <h3 style="font-weight:bold"> Confirmation </h3>  
+            You are about to send <b> <h:outputText value="#{userBean.readCurrSymbol(userBean.usrSrv.loginId).concat(userBean.sentAmount)} "></h:outputText></b> 
+            <!--Boolean in the 'sendAmount' method checks if it's a request, false if not-->
+            <h:commandButton value="Send" action="#{userBean.sendAmount(false)}" ></h:commandButton><br></br>
+            <!--Timestamp is recorded using the thrift service-->
+            <h:outputText value="Sent! Date and Time: #{userBean.timestamp}" rendered="#{userBean.revealPayText}"/>
+        </h:form>
+        
+        <h:form>
+            <br/>
+            <h:commandButton value="Back" action="direct_payment"></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
+

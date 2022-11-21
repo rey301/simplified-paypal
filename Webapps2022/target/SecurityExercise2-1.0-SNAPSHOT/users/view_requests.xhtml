@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>View Requests</title>
+    </h:head>
+    <h:body>
+        <div align="left">
+            <h:form>
+                <label style="font-weight:bold"> User Requests </label>  <br/>
+                <h:dataTable value="#{userBean.getUserRequests()}" var="aaa" class = "display compact">                    
+                    <h:column>  
+                        <f:facet name="header"> Request ID: </f:facet>
+                        #{aaa.id}
+                    </h:column> 
+
+                    <h:column> 
+                        <f:facet name="header"> From: </f:facet>
+                        <h:outputText value="#{userBean.readName(aaa.requesterid).concat(userBean.readSurname(aaa.requesterid))}"></h:outputText>
+                    </h:column> 
+                    
+                    <h:column> 
+                        <f:facet name="header"> Value Requested: </f:facet>
+                        #{userBean.readCurrSymbol(aaa.requesterid).concat(aaa.valuerequested)}
+                    </h:column> 
+                        
+                    <h:column> 
+                        <f:facet name="header"> Status: </f:facet>
+                        #{aaa.status}
+                    </h:column> 
+                    
+                    <h:column> 
+                        <h:commandButton value = "Select" action = "#{userBean.viewRequest(aaa.id, aaa.requesterid, 'user_request_payment', aaa.valuerequested)}" 
+                                        rendered="#{userBean.isFulfilled(aaa.status)}" />
+                    </h:column> 
+                </h:dataTable>
+                
+                
+            </h:form>
+            <h:form>
+                <h:commandButton value="Back" action="user"></h:commandButton>
+            </h:form>
+        </div>
+        
+    </h:body>
+</html>
+

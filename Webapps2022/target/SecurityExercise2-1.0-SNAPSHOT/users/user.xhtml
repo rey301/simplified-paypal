@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>User Page</title>
+    </h:head>
+    <h:body>
+        Welcome <h:outputLabel value="#{loginBean.username}!" /> 
+        <br/>
+        <!--Concatenate the currency symbol and the value using the logged in user's id-->
+        <b>Account Value: </b> <h:outputText value="#{userBean.readCurrSymbol(userBean.usrSrv.loginId)
+                                                      .concat(userBean.readValue(userBean.usrSrv.loginId))}">
+        </h:outputText>
+        <br/>
+        
+        <h:form>
+            <h:commandButton value="Logout" action="#{loginBean.logout()}"/>
+            <h:commandButton value="Make a payment" action="direct_payment"/>
+            <h:commandButton value="Request a payment" action="request_payment"/>
+            <h:commandButton value="View transactions" action="view_transactions"/>
+            <h:commandButton value="View requests" action="view_requests"/>
+            <br/><br/>
+            <!--This button is only rendered/appears on the page if the user is an admin ('disableadminbutton' is set when the user logs in)-->
+            <h:button value="Administrator Page" outcome="/faces/admins/admin" rendered="#{loginBean.disableAdminButton}"/> 
+        </h:form>
+    </h:body>
+</html>
+

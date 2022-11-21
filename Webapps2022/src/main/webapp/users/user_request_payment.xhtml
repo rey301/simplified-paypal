@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+      
+    <h:head>
+        <title>User Payment</title>
+    </h:head>
+    <h:body>
+        <!--Similar to the code used when sending direct payments, except no input is taken-->
+        <h:form>
+            <h3 style="font-weight:bold"> Sender Details </h3>  
+            <b>Name: </b> <h:outputText value="#{userBean.readName(userBean.usrSrv.loginId)}"></h:outputText><br></br>
+            <b>Surname: </b> <h:outputText value="#{userBean.readSurname(userBean.usrSrv.loginId)}"></h:outputText><br></br>
+            <b>Amount: </b> <h:outputText value="#{userBean.readCurrSymbol(userBean.usrSrv.loginId).concat(userBean.readValue(userBean.usrSrv.loginId))}"></h:outputText>
+            
+            <h3 style="font-weight:bold"> Recipient Details </h3>  
+            <b>Name: </b> <h:outputText value="#{userBean.readName(userBean.usrSrv.recId)}"></h:outputText><br></br>
+            <b>Surname: </b> <h:outputText value="#{userBean.readSurname(userBean.usrSrv.recId)}"></h:outputText><br></br>
+            
+            <br/> 
+                <h3 style="font-weight:bold"> Confirmation </h3>  
+                <!--When the user selects the request, the 'sentAmount' is set to the request's value taken from the database--> 
+                You are about to send <b> <h:outputText value="#{userBean.readCurrSymbol(userBean.usrSrv.loginId).concat(userBean.sentAmount)} "></h:outputText></b> 
+                <h:commandButton value="Send" action="#{userBean.sendAmount(true)}" ></h:commandButton><br></br>
+                <h:outputText value="Sent! Date and Time: #{userBean.timestamp}" rendered="#{userBean.revealReqText}"/>
+        </h:form>
+        
+        <h:form>
+            <br/>
+            <h:commandButton value="Back" action="view_requests"></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
+

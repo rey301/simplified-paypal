@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+      
+    <h:head>
+        <title>Send Request</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <!--Similar to user direct payment page-->
+            <h3 style="font-weight:bold"> Requester Details </h3>  
+            <b>Name: </b> <h:outputText value="#{userBean.readName(userBean.usrSrv.loginId)}"></h:outputText><br></br>
+            <b>Surname: </b> <h:outputText value="#{userBean.readSurname(userBean.usrSrv.loginId)}"></h:outputText><br></br>
+            <b>Amount: </b> <h:outputText value="#{userBean.readCurrSymbol(userBean.usrSrv.loginId).concat(userBean.readValue(userBean.usrSrv.loginId))}"></h:outputText>
+            
+            <h3 style="font-weight:bold"> Recipient Details </h3>  
+            <b>Name: </b> <h:outputText value="#{userBean.readName(userBean.usrSrv.recId)}"></h:outputText><br></br>
+            <b>Surname: </b> <h:outputText value="#{userBean.readSurname(userBean.usrSrv.recId)}"></h:outputText><br></br>
+            
+            <br/>
+            Request Amount: <h:inputText id = "requestInput" label = "request" value="#{userBean.requestAmount}" >
+            </h:inputText>   
+
+            <h:commandButton value="Submit"></h:commandButton><br></br>
+
+            <h3 style="font-weight:bold"> Confirmation </h3>  
+            You are about to request <b> <h:outputText value="#{userBean.readCurrSymbol(userBean.usrSrv.loginId).concat(userBean.requestAmount)} "></h:outputText></b>
+            <!--Send the request and add to the request table-->
+            <h:commandButton value="Send" action="#{userBean.sendRequest()}" ></h:commandButton><br></br>
+            <h:outputText value="Request sent!" rendered="#{userBean.revealReqText}"/>
+        </h:form>
+        
+        <h:form>
+            <br/>
+            <h:commandButton value="Back" action="request_payment"></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
+
